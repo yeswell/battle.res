@@ -254,6 +254,11 @@ input[type="date"]
     border-color: RGB(138, 138, 138);
 }
 
+.juror-list:placeholder-shown
+{
+    overflow-x: hidden;
+}
+
 .label
 {
     font-size: 14px;
