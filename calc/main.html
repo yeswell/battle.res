@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    
+    <meta charset="utf-8">
+    <title>Калькулятор | RYPT</title>
+
+    <link rel="icon" href ="https://rypt.ru/.image/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="main.css">
+    
+    <script src="main.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+    
+    <div class="header">
+        <a href="https://rypt.ru" class="link-to-main">
+            <div class="trapeze">
+                <div class="anti-trapeze">
+                    RYPT
+                </div>
+            </div>
+        </a>
+        <div class="title">
+            <div>Российские турниры юных физиков</div>
+        </div>
+    </div>
+    
+    <div class="content">
+        <div class="button-box">
+            <div class="buttons">
+                <div class="main-title">Калькулятор результатов боя</div>
+            </div>
+        </div>
+        <div class="calculator-header">
+            <div class="section-box instruction">
+                <div class="section-title">Инструкция</div>
+                <div class="section">
+                    <div class="subsection-box">
+                        Калькулятор считает результаты одного отборочного боя.
+                        Порядок команд совпадает с порядком их выступлений в
+                        роли Докладчика. Важно сохранять порядок имён членов
+                        жюри и их оценок. Каждое имя должно быть на новой строке.
+                        Между оценками, отказами и штрафами надо ставить пробелы.
+                    </div>
+                </div>
+            </div>
+            <div class="section-box settings">
+                <div class="section-title">Настройки</div>
+                <div class="section flex-col">
+                    <div class="subsection-box">
+                        <div class="subsection-title">Турнир</div>
+                        <div class="subsection switch">
+                            <div class="case">
+                                <div>ТЮФ</div> 
+                                <input type="radio" name="t-type" onclick="set_t_type(this)" value="1" checked/>
+                            </div>
+                            <div class="case">
+                                <div>ТЮЕ</div> 
+                                <input type="radio" name="t-type" onclick="set_t_type(this)" value="2"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subsection-box">
+                        <div class="subsection-title">Количество команд</div>
+                        <div class="subsection switch">
+                            <div class="case">
+                                <div>2</div>
+                                <input type="radio" name="f-type" onclick="set_f_type(this)" value="2"/>
+                            </div>
+                            <div class="case">
+                                <div>3</div>
+                                <input type="radio" name="f-type" onclick="set_f_type(this)" value="3" checked/>
+                            </div>
+                            <div class="case">
+                                <div>4</div>
+                                <input type="radio" name="f-type" onclick="set_f_type(this)" value="4"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-box jurors">
+                <div class="section-title">Жюри</div>
+                <div class="section flex-col">
+                    <div class="subsection-box">
+                        <div class="subsection-title">Ведущий</div>
+                        <div class="subsection">
+                            <input type="text" id="chairperson" placeholder="Андрей Дмитриевич Сахаров"/>
+                        </div>
+                    </div>
+                    <div class="subsection-box">
+                        <div class="subsection-title">Имена членов жюри</div>
+                        <div class="subsection">
+                            <textarea class="juror-list" id="jurors" placeholder="Пётр Леонидович Капица
+Андрей Дмитриевич Сахаров
+Леонид Вениаминович Келдыш"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-box">
+            <div class="section-title">Информация</div>
+            <div class="section">
+                <div class="subsection-box" id=data>
+                    <div class="subsection-title">Общая</div>
+                    <div class="subsection">
+                        <input type="text" id="name"  placeholder="Название турнира"/>
+                        <input type="text" id="fight" placeholder="№ отборочного боя"/>
+                        <input type="date" id="date"/>
+                        <input type="text" id="group" placeholder="Группа"/>
+                    </div>
+                </div>
+                <div class="subsection-box">
+                    <div class="subsection-title">Команды</div>
+                    <div class="subsection" id="teams-names">
+                        <input type="text" onkeyup="set_team_name(this, 1)" placeholder="Название К1"/>
+                        <input type="text" onkeyup="set_team_name(this, 2)" placeholder="Название К2"/>
+                        <input type="text" onkeyup="set_team_name(this, 3)" placeholder="Название К3" name="stage-3"/>
+                        <input type="text" onkeyup="set_team_name(this, 4)" placeholder="Название К4" name="stage-4" hidden/>
+                    </div>
+                </div>
+                <div class="subsection-box">
+                    <div class="subsection-title">Задания</div>
+                    <div class="subsection" id="accepted">
+                        <input type="text" placeholder="Доклад К1"/>
+                        <input type="text" placeholder="Доклад К2"/>
+                        <input type="text" placeholder="Доклад К3" name="stage-3"/>
+                        <input type="text" placeholder="Доклад К4" name="stage-4" hidden/>
+                    </div>
+                </div>
+                <div class="subsection-box">
+                    <div class="subsection-title">Отказы</div>
+                    <div class="subsection" id="rejected">
+                        <input type="text" placeholder="Отказы К1"/>
+                        <input type="text" placeholder="Отказы К2"/>
+                        <input type="text" placeholder="Отказы К3" name="stage-3"/>
+                        <input type="text" placeholder="Отказы К4" name="stage-4" hidden/>
+                    </div>
+                </div>
+                <div class="subsection-box" id="ypt">
+                    <div class="subsection-title">Коэффициенты</div>
+                    <div class="subsection" id="coefs">
+                        <input type="text" placeholder="Коэф. К1"/>
+                        <input type="text" placeholder="Коэф. К2"/>
+                        <input type="text" placeholder="Коэф. К3" name="stage-3"/>
+                        <input type="text" placeholder="Коэф. К4" name="stage-4" hidden/>
+                    </div>
+                </div>
+                <div class="subsection-box" id="ynt" hidden>
+                    <div class="subsection-title">Штрафы</div>
+                    <div class="subsection" id="penalties">
+                        <input type="text" placeholder="К1: NR NP NT"/>
+                        <input type="text" placeholder="К2: NR NP NT"/>
+                        <input type="text" placeholder="К3: NR NP NT" name="stage-3"/>
+                        <input type="text" placeholder="К4: NR NP NT" name="stage-4" hidden/>
+                    </div>
+                </div>            
+            </div>
+        </div>
+        <div class="section-box">
+            <div class="section-title">Действия</div>
+            <div class="section stage">
+                <div class="subsection-box action-number">
+                    <div>I</div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Доклад</div>
+                    <div class="subsection">
+                        <div class="label">Команда №1</div>
+                        <input type="text" class="id-speaker" placeholder="Докладчик"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Оппонирование</div>
+                    <div class="subsection">
+                        <div class="label">Команда №2</div>
+                        <input type="text" class="id-speaker" placeholder="Оппонент"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Рецензия</div>
+                    <div class="subsection">
+                        <div class="label">Команда №3</div>
+                        <input type="text" class="id-speaker" placeholder="Рецензент"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+            </div>
+            <div class="section stage">
+                <div class="subsection-box action-number">
+                    <div>II</div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Доклад</div>
+                    <div class="subsection">
+                        <div class="label">Команда №2</div>
+                        <input type="text" class="id-speaker" placeholder="Докладчик"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Оппонирование</div>
+                    <div class="subsection">
+                        <div class="label">Команда №3</div>
+                        <input type="text" class="id-speaker" placeholder="Оппонент"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Рецензия</div>
+                    <div class="subsection">
+                        <div class="label">Команда №1</div>
+                        <input type="text" class="id-speaker" placeholder="Рецензент"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+            </div>
+            <div class="section stage" name="stage-3">
+                <div class="subsection-box action-number">
+                    <div>III</div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Доклад</div>
+                    <div class="subsection">
+                        <div class="label">Команда №3</div>
+                        <input type="text" class="id-speaker" placeholder="Докладчик"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Оппонирование</div>
+                    <div class="subsection">
+                        <div class="label">Команда №1</div>
+                        <input type="text" class="id-speaker" placeholder="Оппонент"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Рецензия</div>
+                    <div class="subsection">
+                        <div class="label">Команда №2</div>
+                        <input type="text" class="id-speaker" placeholder="Рецензент"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+            </div>
+            <div class="section stage" name="stage-4" hidden>
+                <div class="subsection-box action-number">
+                    <div>IV</div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Доклад</div>
+                    <div class="subsection">
+                        <div class="label">Команда №1</div>
+                        <input type="text" class="id-speaker" placeholder="Докладчик"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Оппонирование</div>
+                    <div class="subsection">
+                        <div class="label">Команда №2</div>
+                        <input type="text" class="id-speaker" placeholder="Оппонент"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Рецензия</div>
+                    <div class="subsection">
+                        <div class="label">Команда №3</div>
+                        <input type="text" class="id-speaker" placeholder="Рецензент"/>
+                        <input type="text" class="id-grades"  placeholder="Оценки жюри"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button-box">
+            <div class="buttons">
+                <div class="button" onclick="calculate()" title="Посчитать результаты боя">Посчитать</div>
+                <div class="button" id="btn-save-pdf" onclick="save_res_in_pdf()">Сохранить PDF</div>
+                <div class="button" id="btn-save-json" onclick="save_res_in_json()">Скачать в JSON</div>
+                <!--
+                <div class="button" id="btn-save" onclick="save_fight()" title="Сохранить все результаты как PDF" hidden>Сохранить</div>
+                <div class="button" id="btn-cancel" title="Отменить редактирование боя" onclick="cancel()" hidden>Отменить</div>
+                -->
+            </div>        
+        </div>
+        <div class="section-box printable" id="t-t-template" hidden>
+            <div class="section-title">Турнирная таблица</div>
+            <div class="section stage">
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Команда</div>
+                    <div class="subsection"></div>
+                </div>
+                <div class="subsection-box performance">
+                    <div class="subsection-title">Сумма баллов</div>
+                    <div class="subsection"></div>
+                </div>
+                <div class="subsection-box performance ynt" hidden>
+                    <div class="subsection-title">Очки победы</div>
+                    <div class="subsection"></div>
+                </div>
+            </div>
+        </div>
+        <div class="section-box printable" id="f-t-template" hidden>
+            <div class="section-title">Бой в группе</div>
+            <div class="section stage">
+                <div class="subsection-box jurors-name-box">
+                    <div class="subsection-title">Члены жюри</div>
+                    <div class="subsection"></div>
+                    <div class="subsection stage-grades">
+                        <div class="grades">
+                            <div class="average" hidden>Средний балл</div>
+                            <div class="grade">Балл за действие</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="subsection-box" id="s-template" hidden>
+                    <div class="subsection-title">Действие</div>
+                    <div class="subsection">
+                        <div class="acc">Задание</div>
+                        <div class="rej">Отказ</div>
+                        <div class="coef" hidden>Коэффициент:</div>
+                        <div class="penalties" hidden>Штраф</div>
+                        <div class="flex-row left-marg">
+                            <div class="rep">Д:</div>
+                            <div class="flex-col">
+                                <div class="team-name"></div>
+                                <div class="speaker"></div>
+                            </div>
+                        </div>
+                        <div class="flex-row left-marg">
+                            <div class="opp">О:</div>
+                            <div class="flex-col">
+                                <div class="team-name"></div>
+                                <div class="speaker"></div>
+                            </div>
+                        </div>
+                        <div class="flex-row left-marg">
+                            <div class="rev">Р:</div>
+                            <div class="flex-col">
+                                <div class="team-name"></div>
+                                <div class="speaker"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="subsection stage-grades">
+                        <div class="grades"></div>
+                        <div class="grades"></div>
+                        <div class="grades"></div>
+                    </div>
+                    <div class="subsection stage-grades">
+                        <div class="grades">
+                            <div class="average" hidden></div>
+                            <div class="grade"></div>
+                        </div>
+                        <div class="grades">
+                            <div class="average" hidden></div>
+                            <div class="grade"></div>
+                        </div>
+                        <div class="grades">
+                            <div class="average" hidden></div>
+                            <div class="grade"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section">
+                <div class="subsection-box">
+                    <div class="subsection-title">Результаты</div>
+                    <div class="subsection stage-grades">
+                        <div class="grades"></div>
+                        <div class="grades"></div>
+                        <div class="grades v-points" hidden></div>
+                    </div>
+                </div>
+                <div class="subsection-box">
+                    <div class="subsection-title">Статистика</div>
+                    <div class="subsection stage-grades">
+                        <div class="grades">
+                            <div class="flex-row">
+                                <div class="key"></div>
+                                <div class="sep"></div>
+                                <div class="val"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

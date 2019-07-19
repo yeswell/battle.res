@@ -1,0 +1,374 @@
+@import url('https://fonts.googleapis.com/css?family=Volkhov:400,700i');
+@import url('https://fonts.googleapis.com/css?family=Scada:400,700');
+
+@media print
+{
+    .content > div:not(.printable)
+    {
+        display: none;
+    }
+    
+    .printable
+    {
+        page-break-after: always;
+    }
+}
+
+body
+{
+    margin: 0;
+}
+
+input:not([type="radio"])
+{
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    border-radius: 5px;
+    border: 1.5px solid RGB(138, 138, 138);
+    text-indent: 2px;
+}
+
+input:nth-of-type(n+2):not([hidden])
+{
+    margin: 5px 0 0 0;
+}
+
+input:not([type="radio"]):focus, .juror-list:focus
+{
+    outline: none;
+    border-radius: 5px;
+    border-color: RGB(74, 118, 168);
+    border-width: 1.5px;
+}
+
+input[type="date"]
+{
+    min-width: 0;
+}
+
+.header
+{
+    width: 100%;
+    margin: 0 0 0.5vh 0;
+    background-color: green;
+    display: flex;
+}
+
+.link-to-main
+{
+    color: black;
+    text-decoration: none;
+}
+
+.trapeze
+{
+    display: inline-block;
+    background-color: grey;    
+    
+    transform: scaleX(1.6)
+               skew(-9deg)
+               translateX(-5%);
+}
+
+.anti-trapeze
+{
+    font-family: 'Volkhov', serif;
+    font-weight: bold;    
+    font-style: italic;
+    font-size:  4vw;
+    
+    transform: translateX(10%)
+               skew(9deg)
+               scaleX(0.625);
+}
+
+.title
+{
+    margin: 0 0 0 14vw;
+    
+    font-family: 'Scada', sans-serif;
+    font-size:  4vw;
+}
+
+.content
+{
+    margin: 0 5% 30px 5%;
+}
+
+.section-title
+{
+    font-family: 'Scada', sans-serif;
+    font-weight: bolder;
+    font-size: 22px;
+    color: RGB(74, 118, 168);
+    white-space: nowrap;
+}
+
+.section-box
+{
+    margin: 30px 0 0 0;
+}
+
+.section:not([hidden])
+{
+    margin: 10px 0 0 0;
+    border-radius: 5px;
+    background-color: RGB(237, 238, 240);
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 0 10px;
+}
+
+.subsection-box
+{
+    flex: 1 1 100%;
+    margin: 0 10px 10px 0;
+}
+
+.subsection-title
+{
+    font-family: 'Scada', sans-serif;
+    font-size: 18px;
+    white-space: nowrap;
+    margin: 0 0 5px 0;
+}
+
+.subsection:not([hidden])
+{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: RGB(225, 226, 230);
+}
+
+.subsection:nth-of-type(n+3)
+{
+    margin: 10px 0 0 0;
+}
+
+.case:not([hidden])
+{
+    margin: 0 10px 0 10px;
+    display: flex;
+}
+
+.main-title
+{
+    font-family: 'Scada', sans-serif;
+    white-space: nowrap;
+    margin: 0 10px 10px 0;
+    padding: 0 20px 0 20px;
+    text-align: center;
+    font-size: 28px;
+}
+
+.stage
+{
+    align-items: center;
+}
+
+.performance
+{
+    /*width: 30%;*/
+}
+
+.calculator-header:not([hidden])
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.instruction
+{
+    flex: 0 0 30%;
+}
+
+.settings
+{
+    flex: 0 0 30%;
+}
+
+.jurors
+{
+    flex: 0 0 30%;
+}
+
+.flex-col
+{
+    flex-direction: column;
+}
+
+.fg:not([hidden])
+{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.factor, .grades
+{
+    min-width: 3ch;
+    width: 100%;
+}
+
+.factor
+{
+    text-align: right;
+    margin: 0 10px 0 0;
+    flex-shrink: 4;
+}
+
+.grades
+{
+    flex-shrink: 1;
+}
+
+.switch:not([hidden])
+{
+    flex-direction: row;
+    display: flex;
+    justify-content: space-around;
+}
+
+.action-number
+{
+    flex: 1 1 5%;
+    min-width: 5%;
+    text-align: center;
+    font-family: 'Volkhov', serif;
+    font-weight: bolder;
+    font-size: 18px;
+    color: RGB(74, 118, 168);
+}
+
+.juror-list
+{
+    box-sizing: border-box;
+    width: 100%;
+    height: 8em;
+    resize: none;
+    border-radius: 5px;
+    border-width: 1.5px;
+    border-color: RGB(138, 138, 138);
+}
+
+.label
+{
+    font-size: 14px;
+    font-family: 'Scada', sans-serif;
+    font-weight: bolder;
+    color: RGB(74, 118, 168);
+    margin: 0 0 3px 0;
+    white-space: nowrap;
+}
+
+.button-box:not([hidden])
+{
+    display: flex;
+    justify-content: center;
+    margin: 30px 0 0 0;
+}
+
+.buttons:not([hidden])
+{
+    display: flex;
+    justify-content: center;
+    background-color: RGB(237, 238, 240);
+    padding: 10px 0 0 10px;
+    border-radius: 1000px; /* lifehack :( */
+}
+
+.button
+{
+    width: 150px;
+    margin: 0 10px 10px 0;
+    padding: 10px 0 10px 0;
+    background-color: RGB(225, 226, 230);
+    border-radius: 1000px; /* lifehack :( */
+    font-family: 'Scada', sans-serif;
+    font-size: 18px;
+    white-space: nowrap;
+    text-align: center;
+    cursor: pointer;
+    border: 1.5px solid RGB(138, 138, 138);
+}
+
+.button:hover
+{
+    border-color: RGB(74, 118, 168);
+}
+
+.flex-row:not([hidden])
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.left-marg
+{
+    margin: 5px 0 0 0;
+}
+
+.stage-grades:not([hidden])
+{
+    display: flex;
+    flex-direction: row;
+}
+
+.grades
+{
+    width: 100%;
+    text-align: center;
+}
+
+.grades:nth-of-type(n+2)
+{
+    border-left: 1.5px solid RGB(138, 138, 138);
+}
+
+.rep, .opp, .rev
+{
+    font-size: 1.5vw;
+    margin: 0 1.5vw 0 0;
+}
+
+.acc, .rej, .fact
+{
+    font-size: 1.5vw;
+}
+
+.team-name, .speaker
+{
+    font-size: 1vw;
+    white-space: nowrap;
+}
+
+.jurors-name-box
+{
+    align-self: flex-end;
+}
+
+.key
+{
+    text-align: right;
+}
+
+.sep
+{
+    text-align: center;
+    flex: 1 4;
+}
+
+.key, .sep, .val
+{
+    white-space: pre;
+    width: 100%;
+}
+
+.val
+{
+    text-align: left;
+}
